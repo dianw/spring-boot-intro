@@ -1,6 +1,8 @@
 # Spring Boot Intro
 Simple Spring Boot web application example.
 
+For the complete example of how spring boot works with other modules (security, social media, etc), you can find at https://github.com/codenergic/theskeleton. Contribution are always welcome.
+
 ## Running the development server
 ```bash
 $ mvn spring-boot:run
