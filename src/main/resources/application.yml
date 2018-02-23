@@ -3,3 +3,12 @@ spring:
     username: sa
     password:
     url: jdbc:h2:file:~/intro/introdb
+  jpa:
+    hibernate:
+      ddl-auto: update
+    show-sql: true
+    
+  h2:
+    console:
+      enabled: true
+      path: /database

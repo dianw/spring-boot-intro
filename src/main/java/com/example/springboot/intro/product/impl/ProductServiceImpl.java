@@ -1,40 +1,38 @@
 package com.example.springboot.intro.product.impl;
 
-import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
-import java.util.concurrent.ConcurrentHashMap;
-import java.util.concurrent.atomic.AtomicLong;
 
 import org.springframework.stereotype.Service;
 
 import com.example.springboot.intro.product.Product;
+import com.example.springboot.intro.product.ProductRepository;
 import com.example.springboot.intro.product.ProductService;
 
 @Service
 public class ProductServiceImpl implements ProductService {
-	private Map<Long, Product> products = new ConcurrentHashMap<>();
-	private AtomicLong atomicLong = new AtomicLong();
+	private final ProductRepository productRepository;
+
+	public ProductServiceImpl(ProductRepository productRepository) {
+		this.productRepository = productRepository;
+	}
 
 	@Override
 	public void deleteProduct(Long id) {
-		products.remove(id);
+		productRepository.delete(id);
 	}
 
 	@Override
 	public Product getProduct(Long id) {
-		return products.get(id);
+		return productRepository.findOne(id);
 	}
 
 	@Override
 	public List<Product> getProducts() {
-		return new ArrayList<>(products.values());
+		return productRepository.findAll();
 	}
 
 	@Override
 	public Product saveProduct(Product product) {
-		product.setId(atomicLong.incrementAndGet());
-		products.put(product.getId(), product);
-		return products.get(product.getId());
+		return productRepository.save(product);
 	}
 }
